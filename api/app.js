@@ -1,3 +1,5 @@
+require('dotenv').config()
+
 const express = require ("express");
 const cors = require ("cors");
 const jwt = require("jsonwebtoken");
@@ -6,7 +8,7 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-const TOKEN_KEY = "X4tvnErxRETbVcqaL15dqMI115eNlp5y";
+const TOKEN_KEY = process.env.TOKEN_KEY;
 
 const verifyToken = (rq, res, next) =>{
     const authHeader = req.hjeaders['authorization'];
@@ -21,7 +23,6 @@ const verifyToken = (rq, res, next) =>{
         next();
     });
 }
-
 
 app.post("/usuario/login", (req,res)=>{
     const usuario = req.body.usuario;
